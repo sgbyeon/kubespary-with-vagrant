@@ -21,13 +21,6 @@ Vagrant.configure("2") do |config|
       cfg.vm.provision "shell", inline: <<-SCRIPT
         sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
         systemctl restart sshd
-        swapoff -a
-        sed -i '/swap/d' /etc/fstab
-        systemctl stop ufw
-        systemctl disable ufw
-        sysctl -w net.ipv4.ip_forward=1
-        sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-        sysctl -p /etc/sysctl.conf
       SCRIPT
 
       # chrony configuration
@@ -59,13 +52,6 @@ Vagrant.configure("2") do |config|
       cfg.vm.provision "shell", inline: <<-SCRIPT
         sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
         systemctl restart sshd
-        swapoff -a
-        sed -i '/swap/d' /etc/fstab
-        systemctl stop ufw
-        systemctl disable ufw
-        sysctl -w net.ipv4.ip_forward=1
-        sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-        sysctl -p /etc/sysctl.conf
       SCRIPT
 
       # chrony configuration
@@ -98,12 +84,6 @@ Vagrant.configure("2") do |config|
       cfg.vm.provision  "shell", inline: <<-SCRIPT
         sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
         systemctl restart sshd
-        sudo apt install python3-pip python3-setuptools virtualenv -y
-        virtualenv --python=python3 venv
-        . venv/bin/activate
-        git clone https://github.com/kubernetes-sigs/kubespray
-        cd kubespray
-        pip install -r requirements.txt
       SCRIPT
 
       # chrony configuration
