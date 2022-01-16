@@ -39,5 +39,11 @@ pip install -r requirements.txt
 ```
 ---
 
+## 설치
+* Bootstrap 서버, venv 환경에서 실행
+```
+ansible-playbook -i inventory/mycluster/inventory.ini --become --become-user=root cluster.yml
+```
+
 ## References
 * https://github.com/choisungwook-vagrant/kubespray-onpremise
